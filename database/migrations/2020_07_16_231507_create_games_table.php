@@ -19,7 +19,7 @@ class CreateGamesTable extends Migration
             $table->string('image_url');
             $table->string('description')->nullable();
             $table->string('gender')->nullable();
-            $table->interger('bestAge')->nullable();
+            $table->integer('bestAge')->nullable();
             $table->date('realeased')->nullable();
             $table->timestamps();
             
