@@ -20,7 +20,7 @@ class CreateGamesTable extends Migration
             $table->string('description')->nullable();
             $table->string('gender')->nullable();
             $table->integer('bestAge')->nullable();
-            $table->date('realeased')->nullable();
+            $table->date('released')->nullable();
             $table->timestamps();
             
         });
