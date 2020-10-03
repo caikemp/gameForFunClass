@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Store;
 use Illuminate\Http\Request;
+use Validator;
 
 class StoreController extends Controller
 {
@@ -27,7 +28,13 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store = new Store;
+
+        $store->name = $request->name;
+        $store->site = $request->site;
+        $store->description = $request->description;
+
+        $store->save();
     }
 
     /**
@@ -38,7 +45,9 @@ class StoreController extends Controller
      */
     public function show(Store $store)
     {
-        //
+        return response()->json([
+            'store' => $store
+        ]);
     }
 
     /**
@@ -50,7 +59,28 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'site' => 'required',
+            'description' => 'required'
+        ]);
+        
+        if($validator->fails()){
+            return response()->json([
+                'error' => $validator->errors()->all()
+            ]);
+        }
+
+        Store::where('id', $store->id)->update([
+            'name' => $request->name,
+            'site' => $request->site,
+            'description' => $request->description,
+        ]);
+
+        return response()->json([
+            'store' => Store::where('id', $store->id)->get(),
+        ]);
+    
     }
 
     /**
@@ -61,6 +91,16 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
-        //
+        if(!$store){
+            return response()->json([
+                'error' => 'Loja não existe'
+            ]);
+        }
+
+        Store::where('id', $store->id)->delete();
+        
+        return response()->json([
+            'error' => 'Loja removida'
+        ]);
     }
 }

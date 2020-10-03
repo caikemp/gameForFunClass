@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use Illuminate\Http\Request;
+use Validator;
 
 class GameController extends Controller
 {
@@ -48,7 +49,9 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
+        return response()->jason([
+            'game' =>$game
+        ]);
     }
 
     /**
@@ -60,7 +63,23 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'description' => 'required',
+            'gender' => 'required',
+            'bestAge' => 'required|integer',
+            'released' => 'nullable|date'
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'error' => $validator->errors()->all()
+            ]);
+        }
+
+        Store::where('id', $store->id)->update([
+            'name'
+        ])
     }
 
     /**
