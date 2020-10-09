@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\StoreService;
 use App\Store;
 use Illuminate\Http\Request;
 use Validator;
@@ -16,7 +17,8 @@ class StoreController extends Controller
     public function index()
     {
         return response()->json([
-            'stores' => Store::paginate(30)
+            'array' => StoreService::index(),
+            'stores' => Store::paginate(30),
         ]);
     }
 
@@ -46,7 +48,7 @@ class StoreController extends Controller
     public function show(Store $store)
     {
         return response()->json([
-            'store' => $store
+            'store' => $store,
         ]);
     }
 
@@ -59,15 +61,15 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'site' => 'required',
-            'description' => 'required'
+            'description' => 'required',
         ]);
-        
-        if($validator->fails()){
+
+        if ($validator->fails()) {
             return response()->json([
-                'error' => $validator->errors()->all()
+                'error' => $validator->errors()->all(),
             ]);
         }
 
@@ -80,7 +82,7 @@ class StoreController extends Controller
         return response()->json([
             'store' => Store::where('id', $store->id)->get(),
         ]);
-    
+
     }
 
     /**
@@ -91,16 +93,16 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
-        if(!$store){
+        if (!$store) {
             return response()->json([
-                'error' => 'Loja não existe'
+                'error' => 'Loja não existe',
             ]);
         }
 
         Store::where('id', $store->id)->delete();
-        
+
         return response()->json([
-            'error' => 'Loja removida'
+            'error' => 'Loja removida',
         ]);
     }
 }

@@ -16,10 +16,9 @@ class GameController extends Controller
     public function index()
     {
         return response()->json([
-            'games' => Game::paginate(30)
+            'games' => Game::paginate(30),
         ]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -50,7 +49,7 @@ class GameController extends Controller
     public function show(Game $game)
     {
         return response()->jason([
-            'game' =>$game
+            'game' => $game,
         ]);
     }
 
@@ -63,43 +62,32 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'description' => 'required',
             'gender' => 'required',
             'bestAge' => 'required|integer',
-            'released' => 'nullable|date'
+            'released' => 'nullable|date',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
-                'error' => $validator->errors()->all()
+                'error' => $validator->errors()->all(),
             ]);
         }
 
         Store::where('id', $store->id)->update([
-            'name'
-        ])
+            'name',
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
-     *            {
-                "id": 1,
-                "name": "The Last of US",
-                "image_url": "in future",
-                "description": "Fiction game",
-                "gender": "fiction",
-                "bestAge": 16,
-                "released": "2020-07-10",
-                "created_at": null,
-                "updated_at": null
-            }
+     *
      * @param  \App\Game  $game
      * @return \Illuminate\Http\Response
      */
     public function destroy(Game $game)
     {
-        //
     }
 }
