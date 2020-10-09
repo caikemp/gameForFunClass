@@ -17,8 +17,9 @@ class StoreController extends Controller
     public function index()
     {
         return response()->json([
-            'array' => StoreService::index(),
-            'stores' => Store::paginate(30),
+            // 'array' => StoreService::index(),
+            "stores2" => StoreService::fillEmptyDates(Store::paginate(30)),
+            // 'stores' => Store::paginate(30),
         ]);
     }
 
