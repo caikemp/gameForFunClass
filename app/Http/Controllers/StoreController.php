@@ -106,4 +106,22 @@ class StoreController extends Controller
             'error' => 'Loja removida',
         ]);
     }
+
+    public function parse(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'string' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()->all(),
+            ]);
+        }
+
+        return response()->json([
+            "string" => $request->string,
+            "parse" => StoreService::sttMapObject($request->string),
+        ]);
+    }
 }

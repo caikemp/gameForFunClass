@@ -78,7 +78,21 @@ class StoreService
         $map = new Suntech319();
         $map->setHeader($sttSplited[0]);
         $map->setDeviceId($sttSplited[1]);
+        $date = \DateTime::createFromFormat(
+            'Y-m-d H:i:s', self::getDate($sttSplited[3]) . " " . $sttSplited[4]
+        );
+        $date->setTimezone(new \DateTimeZone('america/sao_paulo'));
+        $date->sub(new \DateInterval('PT2H'));
+        $map->setDate($date);
 
         return $map->toArray();
+    }
+
+    public static function getDate($str)
+    {
+        $date = substr($str, 0, 4);
+        $date .= '-' . substr($str, 4, 2);
+        $date .= '-' . substr($str, 6, 2);
+        return $date;
     }
 }

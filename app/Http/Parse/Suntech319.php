@@ -30,11 +30,22 @@ class Suntech319
         return $this->deviceId;
     }
 
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
     public function toArray()
     {
         return [
             'header' => $this->header,
             'deviceId' => $this->deviceId,
+            'date' => $this->date,
         ];
 
     }
