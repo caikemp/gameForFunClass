@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resources([
     "games" => "GameController",
-    "stores" => "StoreController",
+    "stores" => "StoreController"
 ]);
 
 Route::post('tratamento/parse', 'StoreController@parse');
