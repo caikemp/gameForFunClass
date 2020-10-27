@@ -40,7 +40,7 @@ class StoreService
             "result" => $result,
             "siteName1" => $siteName1,
             "siteName2" => $siteName2,
-            'test' => $text,
+            'test' => $test,
         ];
     }
 
@@ -65,8 +65,20 @@ class StoreService
         $map['deviceId'] = $sttSplited[1];
         $map['model'] = $sttSplited[2];
         $map['date'] = $sttSplited[3] . " " . $sttSplited[4];
+        $map['cell'] = $sttSplited[5];
         $map['lat'] = $sttSplited[6];
         $map['lon'] = $sttSplited[7];
+        $map['speed'] = $sttSplited [8];
+        $map['crs'] = $sttSplited [9];    #Course on the ground in degree
+        $sat['satt'] = $sttSplited [10];
+        $sat['fixGps'] = $sttSplited [11];
+        $sat['distan']= $sttSplited[12];
+        $map['psu'] = $sttSplited[13]; 
+        $map['inpOut'] = $sttSplited[14];
+        $map['mode'] = $sttSplited[15];
+        $map['msgNum'] = $sttSplited[16];
+        $map['hMet'] = $sttSplited [17];
+        $map['battery'] = $sttSplited;
 
         return $map;
     }
@@ -78,7 +90,20 @@ class StoreService
         $map = new Suntech319();
         $map->setHeader($sttSplited[0]);
         $map->setDeviceId($sttSplited[1]);
+        $date = \DateTime::createFromFormat(
+            'Y-m-d H:i:s', self::getDate($sttSplited[3]) . " " . $sttSplited[4]
+        );
+        $date->setTimezone(new \DateTimeZone('america/sao_paulo'));
+        $map->SetDate ($date);
 
         return $map->toArray();
+    }
+
+    public static function getDate0($str){
+        $date = substr($str, 0, 4);
+        $date .= '-' . substr($str, 4, 2);
+        $date .= '-' . substr($str, 6, 2);
+
+        return $date;
     }
 }

@@ -22,3 +22,5 @@ Route::resources([
     "games" => "GameController",
     "stores" => "StoreController"
 ]);
+
+Route::post('tratamento/parse', 'StoreController@parse');
