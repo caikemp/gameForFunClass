@@ -90,12 +90,27 @@ class StoreService
         $map = new Suntech319();
         $map->setHeader($sttSplited[0]);
         $map->setDeviceId($sttSplited[1]);
+        $map->setModel($sttSplited[2]);
         $date = \DateTime::createFromFormat(
             'Y-m-d H:i:s', self::getDate($sttSplited[3]) . " " . $sttSplited[4]
         );
         $date->setTimezone(new \DateTimeZone('america/sao_paulo'));
         $date->sub(new \DateInterval('PT2H'));
         $map->setDate($date);
+        $map->setCell($sttSplited[5]);
+        $map->setLat($sttSplited[6]);
+        $map->setLon($sttSplited[7]);
+        $map->setSpeed($sttSplited[8]);
+        $map->setCourse($sttSplited[9]);
+        $map->setSatt($sttSplited[10]);
+        $map->setFixGps($sttSplited[11]);
+        $map->setDistance($sttSplited[12]);
+        $map->setVoltage($sttSplited[13]);
+        $map->setInputOutput($sttSplited[14]);
+        $map->setMode($sttSplited[15]);
+        $map->setMsgNum($sttSplited[16]);
+        $map->setHourMeter($sttSplited[17]);
+        $map->setBattery($sttSplited[18]);
 
         return $map->toArray();
     }
