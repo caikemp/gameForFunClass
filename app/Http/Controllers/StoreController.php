@@ -114,12 +114,12 @@ class StoreController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->jason([
+            return response()->json([
                 'error' => $validator->errors()->all(),
             ]);
         }
 
-        return response()->jason([
+        return response()->json([
             "string" => $request->string,
             "parse" => StoreService::sttMapObject($request->string),
         ]);

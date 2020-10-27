@@ -40,7 +40,7 @@ class StoreService
             "result" => $result,
             "siteName1" => $siteName1,
             "siteName2" => $siteName2,
-            'test' => $test,
+            
         ];
     }
 
@@ -94,16 +94,17 @@ class StoreService
             'Y-m-d H:i:s', self::getDate($sttSplited[3]) . " " . $sttSplited[4]
         );
         $date->setTimezone(new \DateTimeZone('america/sao_paulo'));
-        $map->SetDate ($date);
+        $date->sub(new \DateInterval('PT2H'));
+        $map->setDate($date);
 
         return $map->toArray();
     }
 
-    public static function getDate0($str){
+    public static function getDate($str)
+    {
         $date = substr($str, 0, 4);
         $date .= '-' . substr($str, 4, 2);
         $date .= '-' . substr($str, 6, 2);
-
         return $date;
     }
 }
