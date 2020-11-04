@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Parse;
+namespace App\Models;
 
-class Suntech319
+class Position
 {
     private $header;
     private $deviceId;
@@ -190,7 +190,6 @@ class Suntech319
         $this->battery = $battery;
     }
 
-
     public function toArray()
     {
         return [
@@ -211,7 +210,7 @@ class Suntech319
             'mode' => $this->mode,
             'msgNum' => $this->msgNum,
             'hourMeter' => $this->hourMeter,
-            'battery' =>$this->battery
+            'battery' => $this->battery,
         ];
 
     }
