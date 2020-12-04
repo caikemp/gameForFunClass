@@ -46,7 +46,6 @@ class StoreService
 
     public static function fillEmptyDates($stores)
     {
-        //$stt = "SA200STT;076224;3080;20201002;17:00:53;1b8716;-26.933027;-049.137015;000.000;327.94;13;1;127918978;12.86;100000;2;4438;020292;4.1;1";
         $stt = 'SA200STT;403307;313F;20201102;10:02:57;dbc15;-20.729172;-048.057617;030.132;037.62;10;1;13960610;14.03;100000;2;4455;027081;4.2;1';
 
         foreach ($stores as $key => $store) {
@@ -55,7 +54,6 @@ class StoreService
             $store->stt = $stt;
             $store->sttSplited = self::validateModel($stt);
         }
-
         return $stores;
     }
 
@@ -73,18 +71,12 @@ class StoreService
                 return Suntech310Parse::sttMapObject($stt);
                 
             default:
-                return "Modelo não implementado! ";
-               
+                return "Modelo não implementado! ";               
         }
         return $stt;
-
     }
-
 }
 
-/**
- * 
- */
 
 
 
