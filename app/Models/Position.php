@@ -214,7 +214,6 @@ class Position
         ];
 
     }
-
     public function toString()
     {
         return "$this->header;$this->deviceId";
